@@ -19,6 +19,7 @@ class User extends Authenticatable
         'email', 
         'password', 
         'address',
+        'avatar'
     ];
 
     /**
@@ -98,6 +99,10 @@ class User extends Authenticatable
         
         if (file_exists($imagePath)) {
             return asset("images/users/{$this->id}.jpg?" . time());
+        }
+
+        if ($this->avatar) {
+            return $this->avatar;
         }
 
         return 'https://via.placeholder.com/300x300';

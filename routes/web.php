@@ -15,7 +15,11 @@ Route::get('/', 'HomeController@index')->name('home');
 
 Route::get('login', 'Auth\LoginController@login')->name('login');
 Route::post('login', 'Auth\LoginController@store')->name('login.store');
+Route::get('login/google', 'Auth\LoginController@redirectToProvider');
+Route::get('login/google/callback', 'Auth\LoginController@handleProviderCallback');
+
 Route::get('logout', 'Auth\LoginController@logout')->name('logout');
+
 
 Route::get('register', 'UsersController@create')->name('users.create');
 Route::get('users/{user}', 'UsersController@show')->name('users.show');
@@ -25,4 +29,3 @@ Route::post('users/photos', 'Users\PhotosController@store')->name('users.photos.
 
 Route::get('verifications/{user}/{verificationCode}', 'Auth\VerificationController@verify')->name('verify');
 
-// Auth::routes();

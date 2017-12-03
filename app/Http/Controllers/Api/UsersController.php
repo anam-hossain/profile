@@ -57,7 +57,7 @@ class UsersController extends Controller
      */
     public function update(UpdateUserRequest $request, User $user)
     {
-        $user->update($request->only('name', 'email', 'password'));
+        $user->update($request->only('name', 'email', 'address'));
 
         $user->refresh();
 

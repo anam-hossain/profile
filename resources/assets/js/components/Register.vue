@@ -51,7 +51,9 @@
 
         <div class="form-group">
           <div class="col-md-6 col-md-offset-4">
-            <button type="submit" class="btn btn-primary" :disabled="errors.any() || processing">{{ processing ? 'Processing...': 'Register' }}</button>
+            <button type="submit" class="btn btn-primary btn-block" :disabled="errors.any() || processing">{{ processing ? 'Processing...': 'Register' }}</button>
+            <hr>
+            <a href="/login/google" class="btn btn-success btn-block">Signup with Google</a>
           </div>
         </div>
       </form>

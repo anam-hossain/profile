@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
+use Laravel\Socialite\Facades\Socialite;
+use App\Services\GoogleRegistrationService;
 
 class LoginController extends Controller
 {
@@ -50,6 +53,39 @@ class LoginController extends Controller
         Auth::logout();
         
         return redirect()->route('home');
+    }
+
+    /**
+     * Redirect the user to the GitHub authentication page.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function redirectToProvider()
+    {
+        return Socialite::driver('google')
+            ->scopes(['openid', 'profile', 'email'])
+            ->redirect();
+    }
+
+    /**
+     * Obtain the user information from GitHub.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function handleProviderCallback(GoogleRegistrationService $googleRegistrationService)
+    {
+        $googleUser = Socialite::driver('google')->user();
+
+        if (! $googleRegistrationService->isRegistered($googleUser)) {
+            $googleRegistrationService->register($googleUser);
+        }
+
+        $user = User::whereEmail($googleUser->email)->firstOrFail();
+
+        Auth::login($user);
+
+        return redirect()->route('users.show', $user)
+            ->withSuccess('Login Successful.');
     }
 
     /**

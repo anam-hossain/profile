@@ -9,6 +9,8 @@
             <div class="panel panel-primary">
                 <div class="panel-heading">Login</div>
                 <div class="panel-body">
+                    <a href="/login/google" class="btn btn-success">Login with Google</a>
+                    <hr>
                     <form class="form-horizontal" method="POST" action="{{ route('login.store') }}">
                         {{ csrf_field() }}
 

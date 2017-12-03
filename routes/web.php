@@ -11,10 +11,17 @@
 |
 */
 
-Route::get('/', function () {
-    return view('users.show');
-});
+Route::get('/', 'HomeController@index')->name('home');
 
-Route::post('/hello', function (Request $request) {
-    return "Hello World!";
-});
+Route::get('login', 'Auth\LoginController@login')->name('login');
+Route::post('login', 'Auth\LoginController@store')->name('login.store');
+Route::get('logout', 'Auth\LoginController@logout')->name('logout');
+
+Route::get('register', 'UsersController@create')->name('users.create');
+Route::get('users/{user}', 'UsersController@show')->name('users.show');
+
+Route::post('users/photos', 'Users\PhotosController@store')->name('users.photos.store');
+
+Route::get('verifications/{user}/{verificationCode}', 'Auth\VerificationController@verify')->name('verify');
+
+// Auth::routes();

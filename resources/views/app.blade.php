@@ -15,7 +15,18 @@
             <div class="header clearfix">
                 <nav>
                     <ul class="nav nav-pills pull-right">
-                        <li role="presentation" class="active"><a href="#">Logout</a></li>
+                        @if (auth()->check())
+                            <li role="presentation">
+                                <a href="{{ route('logout') }}">Logout</a>
+                            </li>
+                        @else
+                            <li role="presentation">
+                                <a href="{{ route('login') }}">Login</a>
+                            </li>
+                            <li role="presentation">
+                                <a href="{{ route('users.create') }}">Register</a>
+                            </li>
+                        @endif
                     </ul>
                 </nav>
                 <h3 class="text-muted">User management</h3>
@@ -30,6 +41,12 @@
             @if (session()->has('success'))
                 <div class="alert alert-success">
                     {{ session()->get('success') }}
+                </div>
+            @endif
+
+            @if (auth()->check() && !auth()->user()->isVerified())
+                <div class="alert alert-info">
+                    Your account is not verified. Please verify your email address.
                 </div>
             @endif
 

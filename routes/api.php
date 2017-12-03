@@ -13,11 +13,7 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::post('register', 'Api\UsersController@store')->name('api.users.store');
 
-
-Route::post('/hello', function (Request $request) {
-    return "Hello World!";
-});
+Route::get('users/{user}', 'Api\UsersController@show')->name('api.users.show');
+Route::put('users/{user}', 'Api\UsersController@update')->name('api.users.update');

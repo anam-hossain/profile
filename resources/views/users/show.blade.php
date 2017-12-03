@@ -13,10 +13,8 @@
             <img class="img-circle" src="{{ $user->avatar() }}" width="150"></img>
             <p><button class="btn-link" data-toggle="modal" data-target="#upload-photo">Upload photo</button></p>
         </div>
-        
-        <p><strong>Name:</strong> {{ $user->name }}</p>
-        <p><strong>Email:</strong> {{ $user->email }}</p>
-        <p><strong>Address:</strong> {{ $user->address }}</p>
+        <p><a href="{{ route('users.edit', $user) }}">Edit profile</a></p>
+        <user-info :id="{{ $user->id }}"></user-info>
     </div>
 
     <!-- Modal -->

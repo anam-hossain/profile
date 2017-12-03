@@ -19,6 +19,7 @@ Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 
 Route::get('register', 'UsersController@create')->name('users.create');
 Route::get('users/{user}', 'UsersController@show')->name('users.show');
+Route::get('users/{user}/edit', 'UsersController@edit')->name('users.edit');
 
 Route::post('users/photos', 'Users\PhotosController@store')->name('users.photos.store');
 

@@ -36,7 +36,7 @@ class LoginController extends Controller
         }
 
         return redirect()->route('login')
-            ->withError("Sorry! something gone wrong!");
+            ->withError("Email or password not correct. Please try again.");
     }
     
     /**

@@ -16,6 +16,8 @@ window.Vue = require('vue');
  */
 
 Vue.component('register', require('./components/Register.vue'));
+Vue.component('user-info', require('./components/UserInfo.vue'));
+Vue.component('update-user', require('./components/UpdateUser.vue'));
 
 const app = new Vue({
     el: '#app'
